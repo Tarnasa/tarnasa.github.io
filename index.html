@@ -4,10 +4,39 @@
     <meta charset="UTF-8">
     <title>Tarnasa</title>
 </head>
-<body>
-    <h1>Tarnasa</h1>
-    <br/>
-    <div>Hello World!</div>
+<style>
+.side {
+    margin: auto;
+    padding: 10px;
+}
+</style>
+<body style="background-color:#000000; color:#10ee10; font-family:monospace;">
+    <div style="display:flex; flex-direction:row; padding:10px;">
+        <div style="
+            display:flex;
+            flex-direction:column;
+            background-color:#000f00;
+            border-style:solid;
+            border-color:#00ff00;
+            margin:10px;
+            padding:10px;">
+            <div class="side" style="font-size:2em">Tarnasa</div>
+            <div class="side">Programmer, hacker, homestuck</div>
+            <a class="side" href="/index">News</a><br/>
+            <a class="side" href="/projects">Projects</a><br/>
+            <a class="side" href="/about">About</a><br/>
+        </div>
+        <div style="
+            display:flex;
+            flex-direction:column;
+            flex-grow:1;
+            padding:10px;
+            margin:10px auto 10px 10px;">
+            <h1>News</h1>
+            <div style="width:100%; height:1px; background-color:#00ff00; margin-bottom:10px;"/><br/>
+            <div>stuff</div>
+        </div>
+    </div>
 </body>
 </html>
 

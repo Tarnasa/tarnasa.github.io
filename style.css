@@ -25,16 +25,54 @@ body
 
 .side
 {
-    margin: auto;
+    margin: 0 auto 0 auto;
     padding: 10px;
 }
+.side_title
+{
+    font-size:2em;
+}
+.side_quote
+{
+    text-align:center;
+}
 
-.article
+.main
 {
     display:flex;
     flex-direction:column;
     flex-grow:1;
     padding:10px;
     margin:10px auto 10px 10px;
+}
+
+.article
+{
+    //display:flex;
+}
+
+.gallery
+{
+    display:flex;
+    flex-wrap:wrap;
+    align-content:flex-start;
+}
+.gallery_frame
+{
+    display:flex;
+    flex-direction:column;
+    margin:2em;
+}
+.gallery_image
+{
+    display:flex;
+    width:auto;
+    height:256px;
+}
+.gallery_title
+{
+    display:flex;
+    font-style:italic;
+    margin:1em auto 1em auto;
 }
 

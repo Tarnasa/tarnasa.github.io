@@ -46,7 +46,6 @@ body
     padding:0.5em;
     margin:0.5em auto 0.5em 0.5em;
 }
-//a h2 { text-decoration:underline; }
 h2 a:link { color:#10ee40; }
 h2 a:visited { color:#00dd10; }
 h2 a:hover { color:#40ee60; }
@@ -57,7 +56,6 @@ h2 a:active { color:#ee20ee; }
     //display:flex;
 }
 
-// Gallery stuff
 .gallery
 {
     display:flex;

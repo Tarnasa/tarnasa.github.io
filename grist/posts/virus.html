@@ -1,0 +1,55 @@
+<title>Cleaning up viruses remotely</title>
+<date>2016-03-26</date>
+<body>
+
+<img src="/images/totes_legit.png" width=512px/>
+<br/>
+<br/>
+
+<q><b>?</b>: Tarnasa, I tried to download this game but it didn't work</q><br/>
+<q><b>Tarnasa</b>: Hmm, Where did you download it from?</q><br/>
+...<br/>
+<q><b>Tarnasa</b>: Yeah that doesn't look legitimate at all :(</q><br/>
+<q><b>?</b>: I think someone is hacking the computer.</q><br/>
+<br/>
+
+<p>And thus began a week-long endeavor to return the computer to a usable state.
+Normally this would be an easy task, however I was currently hours away from
+the computer that needed repair, so everything would have to be done remotely.
+Ugh tech support.</p>
+
+<p>Not wanting to lose any data to possible ransom-ware, first I made
+sure that the computer was shut off.  Then I had them burn a live image of Debian
+to a USB so that they could boot into it and transfer files off the computer
+without giving the viruses a chance to interfere.</p>
+
+<p>Unfortunately, even after multiple attempts we were unable to boot the
+computer off of the USB, no matter what combination of boot options and f-keys.
+Thankfully there are other ways of booting off of
+external media, so I had them burn the live Debian image to a DVD.  Thankfully this
+worked like a charm, however instructing them to do everything was simply too
+slow and error-prone, so I had them configure the ssh server to allow
+connections through the Minecraft port which I had opened in the firewall
+many years prior.</p>
+
+<p>So now I was able to ssh in, but something was wrong, the OS seemed to run out of
+disk-space almost immediately after booting, was this some side-effect of
+running a live OS off of a DVD?  No, but a few <code>du -sh *</code> around
+the filesystem lead me to the <code>/etc/log</code> directory which contained multiple log files
+with sizes of around 1G each!  Apparently the wireless daemon kept erroring out
+because the desktop computer didn't have a wireless card (but did have a wired connection).
+So after defeating that daemon and its logs, the system was usable again.</p>
+
+<p>Now was time to actually start copying files off of the old windows partition
+and onto an external hard drive I had them connect to the computer.  But before that
+I wanted to know what kind of viruses I was dealing with.  Translating some
+of the chinese-character filenames yielded fairly benign chinese-software such
+as Tencent computer manager and MTView.
+I also found the original trojan <a href="https://www.virustotal.com/en/file/5affe3f881d19e60a25a3a8f35127c764e22e9ce0f5716a0cb275d8a09032394/analysis/1453681636/">file</a>
+pretending to be a free-version of a game.</p>
+
+<p>After copying over what I thought was safe, I had them burn a windows ISO
+to another DVD and reinstall over the old OS.  And the day was saved.</p>
+
+</body>
+

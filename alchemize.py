@@ -90,6 +90,7 @@ def main():
     # How many recent posts to show on the homepage
     number_of_recent_posts = 5
     recent_posts = list()
+    posts = list()
     Post = namedtuple('Post', ('title', 'date', 'body', 'filename'))
 
     # Read in data and metadata from post files
@@ -106,27 +107,36 @@ def main():
             # Format body so that the html looks good (This is a site for programmers, not robots)
             body = strip_empty_lines(body)
             body = indent(body, 4)
-
-            # Generate page for post
             post_filename = date.strftime('%Y-%m-%d') + '-' + safe_filename(title) + '.html'
-            with open(os.path.join('pages/', post_filename), 'wb') as w:
-                w.write(header)
-                w.write(ff("""
-            <h1>{title}</h1>
-            <div style="width:auto; height:1px; background-color:#00ff00; margin-bottom:10px;"></div><br/>
-            <div class="article">
-{body}
-            </div>
-                    """, locals()))
-                w.write(footer)
+            posts.append(Post(title, date, body, post_filename))
 
-            # Remember for homepage
-            if len(recent_posts) < number_of_recent_posts:
-                recent_posts.append(Post(title, date, body, post_filename))
-            elif date > min(post.date for post in recent_posts):
-                # replace oldest post
-                oldest_index = min((post.date, i) for i, post in enumerate(recent_posts))
-                recent_posts[oldest_index] = Post(title, date, body, post_filename)
+    # Generate header side post links
+    side_posts = list()
+    for post in sorted(posts, key=lambda p: p.date, reverse=True):
+        side_posts.append('            <a class="side side_post" href="/pages/{}">{}</a><br/>'.format(post.filename, post.title))
+    side_posts = '\n'.join(side_posts)
+    header = header.format(side_posts=side_posts)
+
+    # Generate page for post
+    for post in sorted(posts, key=lambda p: p.date, reverse=True):
+        with open(os.path.join('pages/', post.filename), 'wb') as w:
+            w.write(header)
+            w.write(ff("""
+        <h1>{post.title}</h1>
+        <div style="width:auto; height:1px; background-color:#00ff00; margin-bottom:10px;"></div><br/>
+        <div class="article">
+{post.body}
+        </div>
+                """, locals()))
+            w.write(footer)
+
+        # Remember for homepage
+        if len(recent_posts) < number_of_recent_posts:
+            recent_posts.append(post)
+        elif post.date > min(recent.date for recent in recent_posts):
+            # replace oldest post
+            oldest_index = min((recent.date, i) for i, recent in enumerate(recent_posts))[1]
+            recent_posts[oldest_index] = post
 
     # Generate index.html
     with open('index.html', 'wb') as homepage:

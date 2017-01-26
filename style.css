@@ -37,6 +37,10 @@ body
 {
     text-align:center;
 }
+a:link.side_post { color:#10ee40; }
+a:visited.side_post { color:#00dd10; }
+a:hover.side_post { color:#40ee60; }
+a:active.side_post { color:#ee20ee; }
 
 .main
 {

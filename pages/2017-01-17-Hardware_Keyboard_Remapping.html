@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tarnasa</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+    <div class="page">
+        <div class="left_box">
+            <div class="side side_title">Tarnasa</div>
+            <div class="side side_quote">Programmer, hacker, homestuck</div>
+            <a class="side" href="/index.html">News</a><br/>
+            <a class="side" href="/projects.html">Projects</a><br/>
+            <a class="side" href="/gallery.html">Gallery</a><br/>
+            <a class="side" href="/about.html">About</a><br/>
+            <div class="side side_title">Posts</div>
+            <a class="side side_post" href="/pages/2017-01-17-Hardware_Keyboard_Remapping.html">Hardware Keyboard Remapping</a><br/>
+            <a class="side side_post" href="/pages/2016-07-08-Reviving_my_first_laptop_-_Part_2.html">Reviving my first laptop - Part 2</a><br/>
+            <a class="side side_post" href="/pages/2016-07-05-Zero-K.html">Zero-K</a><br/>
+            <a class="side side_post" href="/pages/2016-07-03-Vimperator.html">Vimperator</a><br/>
+            <a class="side side_post" href="/pages/2016-04-13-The_End_of_Homestuck.html">The End of Homestuck</a><br/>
+            <a class="side side_post" href="/pages/2016-03-26-Cleaning_up_viruses_remotely.html">Cleaning up viruses remotely</a><br/>
+            <a class="side side_post" href="/pages/2015-12-26-Reviving_my_first_laptop.html">Reviving my first laptop</a><br/>
+            <a class="side side_post" href="/pages/2015-12-21-Gallery_now_open.html">Gallery now open!</a><br/>
+        </div>
+        <div class="main">
+        <h1>Hardware Keyboard Remapping</h1>
+        <div style="width:auto; height:1px; background-color:#00ff00; margin-bottom:10px;"></div><br/>
+        <div class="article">
+                <img src="/images/k3yb04rd_pr0xy.png" width=512px/>
+                <br/>
+                <br/>
+                
+                <p>Ever since using vim and vimperator, I've gotten used to mapping the
+                Caps Lock key to act like another Left Control key.
+                In windows I did this by setting the registry key
+                <pre>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout\Scancode Map</pre>
+                To the following binary value
+                <pre>
+                00 00 00 00 00 00 00 00
+                02 00 00 00 58 00 3A 00
+                00 00 00 00
+                </pre>.
+                In Arch Linux I would use this .Xmodmap file:
+                <pre>
+                clear lock
+                clear control
+                keycode 66 = Control_L
+                add control = Control_L Control_R
+                </pre>.</p>
+                
+                <p>When I switched between computers often, these configuration changes became
+                impossible, the windows change even required me to have administrator access.
+                This is when I had the idea for a hardware-based key remapper.
+                A device that sits between a USB keyboard and a computer, intercepts the
+                keystrokes, and remaps them before they even hit the computer,
+                no more configuring every computer I work at, and I could take this device
+                with me everywhere I go.</p>
+                
+                <p>Well I finally got around to making it.
+                Here are the components I used:
+                <ul>
+                    <li>Teensy 3.6</li>
+                    <li>DuinoFun mini USB Host Shield</li>
+                </ul></p>
+                
+                <p>The USB Host Shield allows the device to act as a "USB Host" just like
+                your computer acts as a USB host to your mouse, keyboard, and whatever other
+                "USB Device"s you may have.
+                When I started the project, I intended to use a circuits@home version of
+                the mini USB Host Shield, but I couldn't find a place to buy them ANYWHERE
+                and the original shop's site was broken.
+                So I had to settle with the DuinoFun version,
+                which I could find zero documentation for, except for a
+                <a href="http://ti994a.cwfk.net/TiUsbKeys.html">single project</a>
+                where someone else had used it.
+                So a week later and my chip came in from China.<br/></p>
+                <a href="/images/solder.jpg">
+                    <img src="/images/solder.jpg" alt="Solder Splatter" height=200px/>
+                </a>
+                
+                <p>I had bought a Teensy 2.0 to go along with it (Because of
+                <a href="http://www.pjrc.com/teensy/td_libs_USBHostShield.html">PJRC's USBHS article</a>
+                ) Unfortunately I had completely missed the part about needing a MCP1825S-3302E/DB
+                to convert the Teensy 2.0 to run at 3.3V.  And without quick access to one
+                of those, I decided to test the USBHS with an Arduino Uno I had won a few years
+                back.<br/><br/>
+                <a href="/images/uno.jpg">
+                    <img src="/images/uno.jpg" alt="Arduino UNO" height=200px/><br/>
+                </a>
+                So I wired it up to the Uno according to
+                <a href="https://www.arduino.cc/en/Main/ArduinoUSBHostShield"/>Arduino's USBHS page</a>
+                and the USBHS pins shown on
+                <a href="http://www.pjrc.com/teensy/td_libs_USBHostShield.html">PJRC's USBHS article</a>
+                and hoped that everything would just work.
+                Fired up Arduino IDE and installed the USBHostShield 2.0 library
+                and tried to run the included board_qc sketch meant to test
+                the USBHS.
+                Unfortunately this failed many times, it wasn't until hours later
+                of replugging everything in and browsing forums that it just magically
+                worked out of the blue.  Nevertheless it is was not reproducable,
+                and I figured the Uno was just too old to work well with the newer hardware.</p>
+                
+                <p>I needed a board capable of acting as a USB Device
+                (Specifically a keyboard) to the computer.
+                I whent back to the store and bought a Teensy 3.6 which already runs
+                at 3.3V (as opposed to the Teensy 2.0 and Uno).
+                Connecting the Teensy 3.6 to the USBHS according to
+                <a href="http://www.circuitsathome.com/mcu/teensy-3-0-now-supported-by-the-usb-host-library/">this article</a>
+                worked perfectly, except that
+                the USHS could only handle low-power USB devices, like old
+                flash drives, but not a backlit USB keyboard.
+                I knew that in the current configuration, the USBS could only provide
+                3.3V to the USB device, however, most USB devices expect 5V,
+                therefore I needed to route the 5V from the computer going into the Teensy
+                to the USBHS and then to the USB Device.
+                To do this, I connected the VIN of the Teensy 3.6 to the VBUS pad on
+                the USBHS and cut the jumper running from the VBUS pad to the USBHS
+                as shown below.</p>
+                <a href="/images/usbhs_vbus_pad.jpg">
+                    <img src="/images/usbhs_vbus_pad.jpg" alt="USBHS VBUS Pad" height=200px/>
+                </a>
+                
+                <p>Now, the board worked perfectly, all that was left was to code
+                up the sketch to grab the keystrokes coming from the keyboard,
+                possibly modify them, and send them onto the computer.</p>
+                
+                <p>The USB Host Shield library v2.0 did not work out of the box with the Teensy 3.6,
+                I had to modify the config files to get them to recognize it's id (and treat it therefore like a Teensy 3.0).</p>
+                TODO TODO TODO TODO
+                
+                <p>USB Keyboard send their state to the USB Host as a wrapped packet containing
+                2 to 8 bytes.
+                <pre>
+                struct MODIFIERKEYS {
+                        uint8_t bmLeftCtrl : 1;
+                        uint8_t bmLeftShift : 1;
+                        uint8_t bmLeftAlt : 1;
+                        uint8_t bmLeftGUI : 1;
+                        uint8_t bmRightCtrl : 1;
+                        uint8_t bmRightShift : 1;
+                        uint8_t bmRightAlt : 1;
+                        uint8_t bmRightGUI : 1;
+                };
+                </pre>
+                The next byte is a reserved field, usually zero.
+                The following 0 to 6 bytes (integers in 0-255) indicate which keys are
+                being held down.
+                Therefore all I have to do is intercept calls with a 0x14 key (Caps Lock),
+                set bit 0 of the first byte, and remove the 0x14 key from being sent to the host.
+                and then do similar when the key is released.</p>
+                
+                <p>I can think of many other interesting uses for this USB keyboard passthrough
+                device.  For example:
+                <ul>
+                    <li>Switch keyboard layouts (DVORAK to QWERTY) by pressing some key combination.</li>
+                    <li>Keyboard macros which are undetectable from software.
+                        (Cheat detection systems could not detect it by scanning the system)</li>
+                    <li>Changing your typing rhythm to avoid biometric detection
+                        (see <a href="https://github.com/leoneckert/deceit-board">https://github.com/leoneckert/deceit-board</a>)</li>
+                    <li>Keylogger (Add a micro SD to the Teensy 3.6</li>
+                </ul>
+                
+                <p>To make your own, the two boards will cost you $30 for the Teensy 3.6 and
+                around $10 for the USBHS.  However, it looks as though this could be done with
+                a Teensy LC board (only $10) instead of the 3.6.
+                Granted, the entire project may cost you alot more in tools
+                (Soldering iron) and wires if you don't already have them.</p>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -156,6 +156,51 @@ def main():
                 """, locals()))
         homepage.write(footer)
 
+    # Read images.meta
+    Image = namedtuple('Image', ('filename', 'alt_text', 'gallery_title'))
+    images = list()
+    print('Reading grist/images.meta...')
+    with open('grist/images.meta', 'r') as image_manifest:
+        for line in image_manifest:
+            line = line.strip()
+            if not line or line[0] == '%':
+                continue
+            filename, alt_text, gallery_title = (s.strip()
+                    for s in line.split(':'))
+            images.append(Image(filename, alt_text, gallery_title))
+    
+    # Warn about files in images/ which do not exist in images.meta
+    image_filenames = set(image.filename for image in images)
+    for path, dirnames, filenames in os.walk('images'):
+        for filename in filenames:
+            if filename[0] != '.':
+                if filename not in image_filenames:
+                    print('WARNING: {} not found in images.meta'.format(filename))
+
+    # Generate gallery.html
+    print('Generating gallery.html...')
+    with open('gallery.html', 'wb') as gallery:
+        gallery.write(header)
+        gallery.write(ff("""
+            <h1>Gallery</h1>
+            <div style="width:auto; height:1px; background-color:#00ff00; margin-bottom:10px;"></div><br/>
+            <div class="gallery">
+            """, locals()))
+        # All the images
+        for filename, alt_text, gallery_title in images:
+            filename = os.path.join('images/', filename)
+            gallery.write(ff("""
+                <a class="gallery_frame" href="{filename}">
+                    <img class="gallery_image" src="{filename}" alt="{alt_text}"/>
+                    <div class="gallery_title">{gallery_title}</div>
+                </a>
+            """, locals()))
+        # Trailer
+        gallery.write(ff("""
+            </div>
+            """, locals()))
+        gallery.write(footer)
+
 
 if __name__ == '__main__':
     main()

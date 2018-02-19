@@ -2,6 +2,8 @@
 % Order here determines order in gallery
 % Empty gallery title means it should be absent from gallery
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+atk_and_def.png     :   Attack And Defense  :   Attack And Defense
+terath_scrot.png    :   Terath Screenshot   :   Terath
 k3yb04rd_pr0xy.png  :   Keyboard proxy      :   Keyboard Proxy
 solder.jpg          :   Solder splatter     :   Solder
 uno.jpg             :   Arduino UNO         :   Uno

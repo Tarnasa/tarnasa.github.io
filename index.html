@@ -15,6 +15,8 @@
             <a class="side" href="/gallery.html">Gallery</a><br/>
             <a class="side" href="/about.html">About</a><br/>
             <div class="side side_title">Posts</div>
+            <a class="side side_post" href="/pages/2018-02-19-Attack_And_Defense.html">Attack And Defense</a><br/>
+            <a class="side side_post" href="/pages/2018-02-19-Terath.html">Terath</a><br/>
             <a class="side side_post" href="/pages/2017-01-17-Hardware_Keyboard_Remapping.html">Hardware Keyboard Remapping</a><br/>
             <a class="side side_post" href="/pages/2016-07-08-Reviving_my_first_laptop_-_Part_2.html">Reviving my first laptop - Part 2</a><br/>
             <a class="side side_post" href="/pages/2016-07-05-Zero-K.html">Zero-K</a><br/>
@@ -27,6 +29,82 @@
         <div class="main">
             <h1>News</h1>
             <div style="width:auto; height:1px; background-color:#00ff00; margin-bottom:10px;"></div><br/>
+            <div class="article">
+            <h2><a href=pages/2018-02-19-Attack_And_Defense.html>Attack And Defense</a></h2>
+            <div>
+                <img src="/images/atk_and_def.png" width=512px/>
+                <br/>
+                <br/>
+                
+                <p>After giving up on Terath, I started on another 2-player game.
+                I had been playing Starcraft: Brood War a lot those days, especially the custom maps.
+                There was a particular map called "Income D" which was a 2-team tower defense game where you got income by sending units down your opponents path.
+                I basically recreated this custom starcraft map as a standalone game, it even has glitchy network support!
+                You can download the game, "Attack and Defense" and it's source files below.
+                (note the source file requires a copy of
+                <a href="https://en.wikipedia.org/wiki/GameMaker:_Studio">GameMaker 7</a>
+                to run)</p>
+                
+                <p> <a href="/games/atk_and_def.7z">Download Link</a> </p>
+                
+                <p>A help file can be found in-game by pressing F1</p>
+                
+                <p>In case you are not familiar with tower defense games,
+                the objective is usually to survive multiple waves of enemies which follow a path.
+                If the enemies manage to reach the endpoint then you lose a life, lose all your lives and you die.</p>
+                
+                <p>You kill these enemies by placing stationary "towers" which can attack the units.
+                These turrets cost money which <i>usually</i> is earned by killing enemies.
+                But in this version money is earned by <b>sending</b> units down your opponent's path.</p>
+                
+                <p>This game has a rudimentary AI, support for 2-player couch-coop, and basic networking support.</p>
+                
+                <p><small>ps. there are cheat codes hidden in the help file</small></p>
+            </div>
+            <div class="article">
+            <h2><a href=pages/2018-02-19-Terath.html>Terath</a></h2>
+            <div>
+                <img src="/images/terath_scrot.png" width=512px/>
+                <br/>
+                <br/>
+                
+                <p>Around 2008 I was really on a game-making spree.
+                One my first "complete" games to come out of this was a turn-based base-expansion game called Terath.</p>
+                
+                <p> <a href="/games/terath_pbt.exe">Download Link</a> </p>
+                
+                <p>A help file can be found in-game by pressing F1, though I'll give a quick summary here:</p>
+                
+                <p>The objective of the game is to destroy all of your opponents pieces.</p>
+                
+                <p>Each player starts the game with a small "base" consisting of a few pieces</p>
+                
+                <p>Players take turns spending points on more pieces.
+                Pieces must be attached to other friendly pieces.
+                Some kinds of pieces generate points.
+                Points <i>usually</i> do not carry to the next round.</p>
+                
+                <p>There 7 main types of pieces:
+                <ul>
+                    <li> Circle - Acts as a hub for bars, can be upgraded into other pieces.
+                    <li> Bar - Generates points each turn.
+                    <li> Cross - Placed between four circles, generates many points, some versions can shoot.
+                    <li> Cannon - Fires a projectile in a single direction.
+                    <li> Healer - Heals nearby pieces.  Upgraded from the circle.
+                    <li> Block - High hitpoints, cannot place other pieces on top of a block.
+                    <li> Tech - Allows for the purchase of next-tier pieces
+                </ul>
+                And a whole collection of other specialty pieces, such as a lightning rod, shield generator, and missile silo.</p>
+                
+                <p>Most of the heavy-hitting weapons are only available at higher tech-levels.
+                Each new tech level costs considerably more than the previous
+                but have more health, generate more points, and look cooler.</p>
+                
+                <p>Pieces can be placed on top of other pieces, (but not on top of a block).
+                This means that players can stomp all over their opponent's base if they so choose.</p>
+                
+                <p>I never got around to creating an AI, so you will have to find a friend to play against!</p>
+            </div>
             <div class="article">
             <h2><a href=pages/2017-01-17-Hardware_Keyboard_Remapping.html>Hardware Keyboard Remapping</a></h2>
             <div>
@@ -261,94 +339,6 @@
                 
                 <p>If you have the time I highly recommend everyone check out this free,
                 open-source game, and maybe even contribute to it!</p>
-            </div>
-            <div class="article">
-            <h2><a href=pages/2016-07-03-Vimperator.html>Vimperator</a></h2>
-            <div>
-                <img src="/images/vimperator.png" width=612px/>
-                <br/>
-                <br/>
-                
-                <p>Switching tasks from editing code to browsing the web to look for documentation on
-                that new API I just started using (or have been using for a year) usually
-                required me to move my hands off of the sacred home row to the mouse just so I
-                could click a link.  Wasting time and focus.</p>
-                
-                <p>I need my internet browser to be completely mouse-free.
-                Thankfully I am not the only one with this aspiration.
-                A Firefox plugin called <a href="http://www.vimperator.org">Vimperator</a>
-                adds Vim-like keybindings to almost every common browser action.</p>
-                
-                <p>The main feature of Vimperator is the way in which you navigate links.
-                First you press 'f' and every clickable link on the page is highlighted yellow.
-                Next you start to type the text inside a link and links which do not contain
-                that text are un-highlighted.  If only one highlighted link remains, then it is
-                'clicked' and you follow that link.
-                Next to every highlighted link is a unique number.
-                This number can be typed out as well, and used in cases where there are
-                multiple links with matching text, or links with no text at all
-                (clickable images for example).</p>
-                
-                <p>Some other features which I use quite often are:
-                <ul>
-                    <li>y - Copy the current url</li>
-                    <li>; y - Copy a link</li>
-                    <li>gf - Toggle between page and page source</li>
-                    <li>/ - Highlight all occurrences of a word</li>
-                    <li>o google cats - Use Google (instead of my default DuckDuckGo) to search for cats</li>
-                    <li>O - Edit the current url and then open it (Supports C-w to backspace over words)</li>
-                </ul>
-                
-                <p>If you don't like using the mouse,
-                or want to impress your hacker friends,
-                I highly recommend trying out vimperator.</p>
-            </div>
-            <div class="article">
-            <h2><a href=pages/2016-04-13-The_End_of_Homestuck.html>The End of Homestuck</a></h2>
-            <div>
-                <img src="/images/f1x_th1s.png" width=612px/>
-                <br/>
-                <br/>
-                
-                <p>Though it was 7 years ago that it was given life, it is only today it will be given an ending!</p>
-                
-                <p>My introduction to the webcomic was probably different from most.
-                It all started when <a href="//c418.org">c418</a> stopped having direct playable links to his
-                albums on his website, forcing me to go to <a href="//bandcamp.com">bandcamp</a>
-                to listen to his albums.  At that time, the Homestuck albums were constantly
-                at the top of the charts, and eventually I started listening to and enjoying the
-                spunky Homestuck themes.</p>
-                
-                <p>Eventually I figured it was time to find out what Homestuck
-                actually was (for all I knew it was just some indie band).
-                Reading the first few pages, I immediately fell in love with the webcomic's
-                vocabulary, John's shitty programming, and the many characters' shenanigans,
-                which were at the same time incredibly silly and incredibly complex,
-                with tons of self-referential jokes and plot elements.
-                It was a story that felt like it had no obvious goal, or if it did, it didn't
-                care how long it would take to get there, so instead it just looped in on
-                itself, creating fantastical scenarios and observing the consequences of them
-                (For example, John prototyping his kernelsprite with the harlequin doll).</p>
-                
-                <p>Within a few months I had completely caught up, and had just watched the amazing 
-                <a href="http://www.mspaintadventures.com/cascade.php?s=6&p=6009">[S] Cascade</a>.
-                Along the way I had learned Morse code, how to read most of the trolls typing quirks,
-                and a whole lot of unconventional English words.</p>
-                
-                <p>But then the came the gigapauses, and, like many other people, I stopped thinking about
-                Homestuck things.  So when Homestuck came back around to wrap up the gig,
-                I decided I had to do SOMETHING to commemorate the event.  There were dozens of us
-                Homestucks at my college, DOZENS.</p>
-                
-                <p>I decided to print some of the most popular
-                <a href="//reddit.com/r/homestuck">r/homestuck</a> memes and put them up around
-                campus in what I deemed appropriate places.  I can't say it was the most
-                professional thing I've done, but I did
-                end up meeting a few other people who had read the comic as well.
-                I also ended up creating a python script to grab these images for me using
-                the subreddit's stylesheet and spritesheet.
-                I doubt these silly faces will stay up long, but I hope others will get
-                a chuckle finding them.</p>
             </div>
         </div>
     </div>
